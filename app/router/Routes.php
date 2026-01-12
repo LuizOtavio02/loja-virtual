@@ -8,7 +8,7 @@ class Routes
         return [
             'get' => [
                 '/dev/loja-virtual/public/' => 'HomeController@index',
-                '/dev/loja-virtual/public/produto' => 'ProdutoController'
+                '/dev/loja-virtual/public/produto' => 'ProdutoController@produto'
             ],
             'post' => []
         ];

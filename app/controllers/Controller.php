@@ -1,8 +1,7 @@
 <?php 
 namespace app\controllers;
 
-use app\router\Router;
-use app\router\Uri;
+use Exception;
 
 
 class Controller
@@ -11,44 +10,35 @@ class Controller
     const FOLDERS_CONTROLLER = ['admin', 'site'];
     const ERROR_CONTROLLER = '\\app\\controllers\\erro\\ErroController';
 
-    private $router;
-    private $uri;
-
-    public function __construct() {
-        $this->uri = new Uri;
-        $this->router = new Router;
-    }
-
-    private function getController()
+    public function execute($route)
     {
-        if (!$this->uri->emptyUri()) {
-            return $this->router->getController();
+        if (!str_contains( $route,'@')) {
+            throw new Exception("Formato de Rota Invalida");        
         }
-
-        return ucfirst(DEFAULT_CONTROLLER).'Controller';
-    }
-
-    public function getMethod()
-    {
-        if (!$this->uri->emptyUri()) {
-            return $this->router->getMethod();
-        }
-
-        return DEFAULT_METHOD;
-    }
-
-    public function controller()
-    {
-        $controller = $this->getController();
-
+        
+        list($controller, $method) = explode('@',$route);
+        
         foreach (self::FOLDERS_CONTROLLER as $folderController) {
             if (class_exists(self::NAMESPACE_CONTROLLER.$folderController.'\\'.$controller)) {
-                return self::NAMESPACE_CONTROLLER.$folderController.'\\'.$controller;
+                $controllerNamespace = self::NAMESPACE_CONTROLLER.$folderController.'\\'.$controller;
+                break;
             }
         }
 
-        return self::ERROR_CONTROLLER;
+        // isset para confirmar se $controllerNamespace existe e esta setado após o foreach
+        if (!isset($controllerNamespace)) {
+            throw new Exception("Controller {$controller} não encontrado");
+        }
+
+        $controller = new $controllerNamespace;
+
+        if (!method_exists($controller, $method)) {
+            throw new Exception("O método {$method} não existe em {$controllerNamespace}");
+        }
+
+        $controller->$method();
     }
+
 }
 
 

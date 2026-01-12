@@ -16,37 +16,23 @@ class RouterFIlter
 
     public function simpleRoute()
     {
-        if (array_key_exists($this->uri,$this->routes[$this->typeRoute])) {
-            return $this->routes[$this->typeRoute][$this->uri];
+        $uri = rtrim($this->uri, '/');
+        if (array_key_exists($uri,$this->routes[$this->typeRoute])) {
+            return $this->routes[$this->typeRoute][$uri];
         }
 
-        return ucfirst(DEFAULT_CONTROLLER).'Controller';
+        return null;
     }
 
     public function controller()
     {
         $route = $this->simpleRoute();
-        if (str_contains($route,'@')) {
-            list($controller, $method) = explode('@',$route);
-
-            return $controller;
+        
+        if ($route) {
+            return $route;
         }
 
-        return $route;
-        
-    }
-
-    public function method()
-    {
-        $route = $this->simpleRoute();
-        if (str_contains($route,'@')) {
-            list($controller, $method) = explode('@',$route);
-
-            return $method;
-        }
-
-        return DEFAULT_METHOD;
-        
+        return ucfirst(DEFAULT_CONTROLLER).'Controller@'.DEFAULT_METHOD;
     }
 }
 

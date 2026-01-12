@@ -1,21 +1,22 @@
 <?php 
 namespace app\router;
 
+use app\controllers\Controller;
+
 class Router
 {
-    private $routerFilter;
-
-    public function __construct() {
-        $this->routerFilter = new RouterFIlter;
-    }
-    public function getController()
+    public function run()
     {
-        return $this->routerFilter->controller();
-    }
+        try {
+            $routeFilter = new RouterFIlter;
+            $route = $routeFilter->controller();
 
-    public function getMethod()
-    {
-        return $this->routerFilter->method();
+            $controller = new Controller;
+            $controller->execute($route);
+
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+        }
     }
 }
 
