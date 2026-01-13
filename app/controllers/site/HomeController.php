@@ -1,11 +1,13 @@
 <?php 
 namespace app\controllers\site;
 
-class HomeController
+use app\controllers\BaseController;
+
+class HomeController extends BaseController
 {
     public function index()
     {
-        dd('dentro do index do luiz');
+        dd($this->twig);
     }
 }
 

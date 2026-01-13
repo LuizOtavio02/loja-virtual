@@ -1,14 +1,10 @@
 <?php 
- session_start();
+session_start();
 
- define('DEFAULT_CONTROLLER', 'home');
- define('DEFAULT_METHOD', 'index');
- 
-
-
- require '../vendor/autoload.php';
- require '../app/functions/functions_twig.php';
- require 'bootstrap/bootstrap.php';
+require '../app/config/constants.php';
+require '../vendor/autoload.php';
+require '../app/functions/functions_twig.php';
+require 'bootstrap/bootstrap.php';
 
 
 

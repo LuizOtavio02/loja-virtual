@@ -1,15 +1,24 @@
 <?php
 
+use app\classes\Template;
+use app\controllers\BaseController;
 use app\controllers\Controller;
-use app\controllers\Method;
 use app\router\Router;
-use app\router\RouterFIlter;
-use app\router\Uri;
 
+
+$template = new Template;
+$twig = $template->init();
+
+
+/**
+ * Responsável por:
+ * - Iniciar o Router
+ * - Encontrar o Controller correspondente à rota e executá-lo
+ */
 $controller = new Controller;
 $router = new Router;
+$baseController = new BaseController;
 $route = $router->run();
-
-$con =  $controller->execute($route);
-
+$controller->execute($route);
+$baseController->setTwig($twig);
 ?>

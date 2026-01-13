@@ -4,19 +4,20 @@ namespace app\router;
 
 class RouterFIlter
 {
-    public string $uri;
+    public $uri;
     public string $typeRoute;
     public array $routes;
 
     public function __construct() {
-        $this->uri = Uri::get();
+        $this->uri = new Uri;
         $this->typeRoute = RouteType::get();
         $this->routes = Routes::get();
     }
 
     public function simpleRoute()
     {
-        $uri = rtrim($this->uri, '/');
+        $uri = ($this->uri->emptyUri()) ? $this->uri->get() : rtrim($this->uri->get(), '/');
+
         if (array_key_exists($uri,$this->routes[$this->typeRoute])) {
             return $this->routes[$this->typeRoute][$uri];
         }
@@ -32,7 +33,7 @@ class RouterFIlter
             return $route;
         }
 
-        return ucfirst(DEFAULT_CONTROLLER).'Controller@'.DEFAULT_METHOD;
+        return ERROR_CONTROLLER;
     }
 }
 

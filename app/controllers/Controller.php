@@ -12,9 +12,17 @@ class Controller
 
     public function execute($route)
     {
+        if ($route == ERROR_CONTROLLER) {
+            list($controller, $method) = explode('@', $route);
+            $error = self::ERROR_CONTROLLER;
+            $controller = new $error;
+            $controller->$method();
+        }
+
         if (!str_contains( $route,'@')) {
             throw new Exception("Formato de Rota Invalida");        
         }
+
         
         list($controller, $method) = explode('@',$route);
         
