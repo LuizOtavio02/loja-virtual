@@ -25,10 +25,33 @@ class RouterFIlter
         return null;
     }
 
+    public function dynamicRoute()
+    {   
+        $uri = ($this->uri->emptyUri()) ? $this->uri->get() : rtrim($this->uri->get(), '/');
+
+        foreach ($this->routes[$this->typeRoute] as $index => $rota) {
+            $regex = str_replace('/','\/', ltrim($index,'/'));
+            if ($index !== '/' && preg_match("/^$regex$/",ltrim($uri, '/'))) {
+                $registerRoute = $rota;
+                break;
+            }else{
+                $registerRoute = null;
+            }
+        }
+
+        return $registerRoute;
+    }
+
     public function controller()
     {
         $route = $this->simpleRoute();
         
+        if ($route) {
+            return $route;
+        }
+
+        $route = $this->dynamicRoute();
+
         if ($route) {
             return $route;
         }
