@@ -5,7 +5,8 @@ class Template
 {
     public function loader()
     {
-        return new \Twig\Loader\FilesystemLoader(['/../views/admin', '../app/views/site']);
+        return new \Twig\Loader\FilesystemLoader([dirname(__DIR__) . '/views/admin',
+            dirname(__DIR__) . '/views/site']);
     }
 
     public function init()

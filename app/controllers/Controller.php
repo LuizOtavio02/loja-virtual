@@ -10,7 +10,7 @@ class Controller
     const FOLDERS_CONTROLLER = ['admin', 'site'];
     const ERROR_CONTROLLER = '\\app\\controllers\\erro\\ErroController';
 
-    public function execute($route)
+    public function execute($route, $twig)
     {
         if ($route == ERROR_CONTROLLER) {
             list($controller, $method) = explode('@', $route);
@@ -39,6 +39,8 @@ class Controller
         }
 
         $controller = new $controllerNamespace;
+        $controller->setTwig($twig);
+        
 
         if (!method_exists($controller, $method)) {
             throw new Exception("O método {$method} não existe em {$controllerNamespace}");

@@ -6,19 +6,20 @@ use app\controllers\Controller;
 use app\router\Router;
 
 
-$template = new Template;
-$twig = $template->init();
-
-
 /**
  * Responsável por:
  * - Iniciar o Router
  * - Encontrar o Controller correspondente à rota e executá-lo
  */
-$controller = new Controller;
+
 $router = new Router;
-$baseController = new BaseController;
 $route = $router->run();
-$controller->execute($route);
-$baseController->setTwig($twig);
+
+$template = new Template;
+$twig = $template->init();
+
+$controller = new Controller;
+$controller->execute($route, $twig);
+
+
 ?>

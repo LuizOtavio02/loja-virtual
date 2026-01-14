@@ -7,7 +7,14 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        dd($this->twig);
+        $dados = [
+            'titulo' => 'Home',
+        ];
+
+        $template = $this->twig->load('site_home.html');
+        
+        $template->display($dados);
+    
     }
 }
 
