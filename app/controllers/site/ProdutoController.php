@@ -7,19 +7,25 @@ class ProdutoController extends BaseController
 {
     public function produto()
     {
-        dd('produto metodo do produto controller');
+        $dados = [
+            'titulo' => 'produto',
+        ];
+
+        $template = $this->twig->load('site_produto.html');
+        
+        $template->display($dados);
     }
 
     public function index($index)
     {
         
         $dados = [
-            'titulo' => 'Home',
+            'titulo' => 'produto',
             'index' => $index[0],
             
         ];
 
-        $template = $this->twig->load('site_home.html');
+        $template = $this->twig->load('site_produto.html');
         
         $template->display($dados);
     }
