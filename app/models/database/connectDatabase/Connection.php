@@ -1,19 +1,22 @@
 <?php 
 namespace app\models\database\connectDatabase;
 
-use app\interfaces\InterfaceConnectDatabase;
+use PDO;
 
 class Connection
 {
-    private $interfaceConnectDatabase;
+    protected static ?PDO $pdo = null;
 
-    public function __construct(InterfaceConnectDatabase $interfaceConnectDatabase) {
-        $this->interfaceConnectDatabase = $interfaceConnectDatabase;
-    }
-
-    public function connectDatabase()
+    public static function get()
     {
-        return $this->interfaceConnectDatabase->connectDatabase();
+        if (is_null(self::$pdo)) {
+            self::$pdo =  new PDO('mysql:host=localhost;dbname=phppoo;charset=utf8mb4', 'root','',[
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+        }
+
+        return self::$pdo;
     }
 }
 

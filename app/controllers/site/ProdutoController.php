@@ -16,13 +16,11 @@ class ProdutoController extends BaseController
         $template->display($dados);
     }
 
-    public function index($index)
+    public function index()
     {
         
         $dados = [
             'titulo' => 'produto',
-            'index' => $index[0],
-            
         ];
 
         $template = $this->twig->load('site_produto.html');
