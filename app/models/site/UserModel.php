@@ -3,9 +3,9 @@ namespace app\models\site;
 
 use app\models\Model;
 
-class User extends Model
+class UserModel extends Model
 {
-    public $table = 'users';
+    public $table = 'cliente';
 }
 
 

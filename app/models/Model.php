@@ -1,13 +1,12 @@
 <?php 
 namespace app\models;
 
-use app\models\database\connectDatabase\Connection;
 use PDO;
 
 
-abstract class Model
+class Model
 {
-    protected ?PDO $pdo = null;
+    public ?PDO $pdo = null;
     protected $table;
 
     public function __construct() {
@@ -16,20 +15,20 @@ abstract class Model
 
     public function fetchAll()
     {
-        $sql = "select * from {$this->table}";
-        $prepare = $this->pdo->prepare($sql);
+        $query = "select * from {$this->table}";
+        $prepare = $this->pdo->prepare($query);
         $prepare->execute();
 
         return $prepare->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
-    public function find($field, $value)
+    public function find($field, $value, $flag = null)
     {
-        $sql = "select * from {$this->table} where {$field} = :{$field}";
-        $prepare = $this->pdo->prepare($sql);
+        $query = "select * from {$this->table} where {$field} = :{$field}";
+        $prepare = $this->pdo->prepare($query);
         $prepare->execute([$field => $value]);
 
-        return $prepare->fetch();
+        return ($flag == null) ? $prepare->fetch() : $prepare->fetchAll();
 
     }
 
