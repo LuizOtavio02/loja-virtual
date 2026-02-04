@@ -21,6 +21,7 @@ $route = $router->run();
 $template = new Template;
 $twig = $template->init();
 $twig->addFunction($site_url);
+$twig->addFunction($categorias);
 
 
 $controller = new Controller;

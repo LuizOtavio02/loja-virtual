@@ -20,4 +20,13 @@ class ProdutoRepository
 
         return $prepare->fetchAll();
     }
+
+    public function listarProdutoEsportivo($id)
+    {
+        $query = "select * from {$this->produto->table} where id_categoria = :id";
+        $prepare = $this->produto->pdo->prepare($query);
+        $prepare->execute(['id' => $id]);
+
+        return $prepare->fetchAll();
+    }
 }

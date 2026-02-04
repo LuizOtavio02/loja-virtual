@@ -6,5 +6,5 @@ use app\models\Model;
 
 class ProdutoModel extends Model
 {
-    public $table = 'users';
+    public $table = 'produtos';
 }
