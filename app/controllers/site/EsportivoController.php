@@ -7,7 +7,7 @@ use app\repositories\site\ProdutoRepository;
 
 class EsportivoController extends BaseController
 {
-    public function produto()
+    public function index()
     {
         $produtoRepository = new ProdutoRepository;
         $produtos = $produtoRepository->listarProdutoEsportivo(2);
@@ -18,6 +18,22 @@ class EsportivoController extends BaseController
         ];
 
         $template = $this->twig->load('site_esportivo.html');
+        
+        $template->display($dados);
+    }
+
+    public function produto($params)
+    {
+        $slug = $params[0];
+        $produtoRepository = new ProdutoRepository;
+        $produto = $produtoRepository->produtoEsportivo($slug);
+        
+        $dados = [
+            'titulo' => 'produto',
+            'produto' => $produto
+        ];
+
+        $template = $this->twig->load('site_esportivo_item.html');
         
         $template->display($dados);
     }

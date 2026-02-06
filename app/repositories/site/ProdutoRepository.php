@@ -29,4 +29,13 @@ class ProdutoRepository
 
         return $prepare->fetchAll();
     }
+
+    public function produtoEsportivo($slug)
+    {
+        $query = "select * from {$this->produto->table} where produto_slug = :slug";
+        $prepare = $this->produto->pdo->prepare($query);
+        $prepare->execute(['slug' => $slug]);
+
+        return $prepare->fetch();
+    }
 }

@@ -8,9 +8,8 @@ class Routes
         return [
             'get' => [
                 '/dev/loja-virtual/public/' => 'HomeController@index',
-                '/dev/loja-virtual/public/produto' => 'ProdutoController@produto',
-                '/dev/loja-virtual/public/produto/[0-9]+' => 'ProdutoController@index',
-                '/dev/loja-virtual/public/esportivo' => 'EsportivoController@produto',
+                '/dev/loja-virtual/public/esportivo' => 'EsportivoController@index',
+                '/dev/loja-virtual/public/esportivo/[a-z0-9]+(?:-[a-z0-9]+)*' => 'EsportivoController@produto'
             ],
             'post' => []
         ];
