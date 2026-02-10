@@ -1,0 +1,11 @@
+<div  class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% set i=0 %}
+            {% for breadCrumb in breadCrumb() %}
+                <li class="breadcrumb-item" aria-current="page"><a href="{{ breadCrumb.link }}">{{ breadCrumb.nome }}</a></li>
+            {% set i = i+1 %}
+            {% endfor %}
+        </ol>
+    </nav>
+</div>

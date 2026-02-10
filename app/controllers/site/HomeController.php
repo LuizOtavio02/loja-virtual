@@ -1,15 +1,15 @@
 <?php 
 namespace app\controllers\site;
 
+use app\classes\BreadCrumb;
 use app\controllers\BaseController;
-use app\models\site\UserModel;
-use app\repositories\site\ProdutoRepository;
 
 class HomeController extends BaseController
 {
     public function index()
     {
-        
+        $bread = new BreadCrumb;
+        $breadCrumb = $bread->createBreadCrumb();
         $dados = [
             'titulo' => 'Home',
         ];

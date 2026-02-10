@@ -1,7 +1,7 @@
 <?php
 
+use app\classes\BreadCrumb;
 use app\repositories\site\CategoriaRepository;
-use app\repositories\site\ProdutoRepository;
 
 $site_url = new \Twig\TwigFunction('site_url', function(){
     return 'http://'.$_SERVER['SERVER_NAME'].'/dev/loja-virtual/public/';
@@ -12,8 +12,8 @@ $categorias = new \Twig\TwigFunction('categorias', function(){
     return $categoriaRepository->listarCategorias();
 });
 
-$produtoEsportivo = new \Twig\TwigFunction('produto', function(){
-    $produtoRepository = new ProdutoRepository;
-    return $produtoRepository->listarProdutoEsportivo(1);
+$breadCrumb = new \Twig\TwigFunction('breadCrumb', function(){
+    $breadCrumb = new BreadCrumb;
+    return $breadCrumb->createBreadCrumb();
 });
 ?>

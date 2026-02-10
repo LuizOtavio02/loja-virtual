@@ -22,7 +22,7 @@ $template = new Template;
 $twig = $template->init();
 $twig->addFunction($site_url);
 $twig->addFunction($categorias);
-
+$twig->addFunction($breadCrumb);
 
 $controller = new Controller;
 $controller->execute($route, $twig);

@@ -5,20 +5,20 @@ namespace app\controllers\site;
 use app\controllers\BaseController;
 use app\repositories\site\ProdutoRepository;
 
-class EsportivoController extends BaseController
+class SocialController extends BaseController
 {
     public function index()
     {
         
         $produtoRepository = new ProdutoRepository;
-        $produtos = $produtoRepository->listarProdutoEsportivo(2);
+        $produtos = $produtoRepository->listarProdutoEsportivo(3);
         
         $dados = [
-            'titulo' => 'Esportivo',
+            'titulo' => 'Social',
             'produtos' => $produtos
         ];
 
-        $template = $this->twig->load('site_esportivo.html');
+        $template = $this->twig->load('site_social.html');
         
         $template->display($dados);
     }
@@ -30,11 +30,11 @@ class EsportivoController extends BaseController
         $produto = $produtoRepository->produtoEsportivo($slug);
         
         $dados = [
-            'titulo' => 'Esportivo',
+            'titulo' => 'Social',
             'produto' => $produto
         ];
 
-        $template = $this->twig->load('site_esportivo_item.html');
+        $template = $this->twig->load('site_social_item.html');
         
         $template->display($dados);
     }
