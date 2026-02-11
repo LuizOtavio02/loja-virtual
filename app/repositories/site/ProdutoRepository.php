@@ -38,4 +38,15 @@ class ProdutoRepository
 
         return $prepare->fetch();
     }
+
+    public function buscarProduto($validateBusca)
+    {
+        $busca = "%$validateBusca%";
+
+        $query = "select p.*, c.nome as categoria_nome from {$this->produto->table} p join categorias c on p.id_categoria = c.id where p.nome like :busca";
+        $prepare = $this->produto->pdo->prepare($query);
+        $prepare->execute(['busca' => $busca]);
+
+        return $prepare->fetchAll();
+    }
 }

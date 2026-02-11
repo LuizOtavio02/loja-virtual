@@ -13,7 +13,8 @@ class Routes
                 '/dev/loja-virtual/public/casual' => 'CasualController@index',
                 '/dev/loja-virtual/public/casual/[a-z0-9]+(?:-[a-z0-9]+)*' => 'CasualController@produto',
                 '/dev/loja-virtual/public/social' => 'SocialController@index',
-                '/dev/loja-virtual/public/social/[a-z0-9]+(?:-[a-z0-9]+)*' => 'SocialController@produto'
+                '/dev/loja-virtual/public/social/[a-z0-9]+(?:-[a-z0-9]+)*' => 'SocialController@produto',
+                '/dev/loja-virtual/public/busca' => 'BuscaController@index'
             ],
             'post' => []
         ];

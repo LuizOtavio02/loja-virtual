@@ -23,35 +23,41 @@ class BreadCrumb
 
     public function createBreadCrumb()
     {
-        
+
         $base = "/dev/loja-virtual/public";
 
-        if ($this->uri->get() == $base.'/' || $this->uri->get() == '/') {
+        if ($this->uri->get() == $base . '/' || $this->uri->get() == '/') {
             return [
                 ['nome' => 'Inicio', 'link' => $base]
             ];
         }
 
-        $uriExplode = array_filter(explode('/',$this->uri->get()));
-        $baseExplode = array_filter(explode('/',$base));
+        $uriExplode = array_filter(explode('/', $this->uri->get()));
+        $baseExplode = array_filter(explode('/', $base));
 
-        $arrayDiff = array_values(array_diff($uriExplode,$baseExplode));
+        $arrayDiff = array_values(array_diff($uriExplode, $baseExplode));
 
         $breadCrumb = [
             ['nome' => 'Inicio', 'link' => $base]
-        ]; 
-        
+        ];
+
         $path = '';
 
         foreach ($arrayDiff as $item) {
             $path .= '/' . $item;
+
+            $link = $base . $path;
+
+            if ($item === 'busca') {
+                $link .= '?b=' . urlencode($_GET['b']);
+            }
+
             $breadCrumb[] = [
                 'nome' => ucfirst(str_replace('-', ' ', $item)),
-                'link' => $base . $path
+                'link' => $link
             ];
         }
 
         return $breadCrumb;
-        
     }
 }

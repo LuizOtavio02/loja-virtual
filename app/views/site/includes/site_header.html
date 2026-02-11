@@ -26,13 +26,17 @@
       </ul>
     </div>
     <div class="d-flex align-items-center">
-      <form class="w-100 me-3" role="search">
+      <form method="get" action="/dev/loja-virtual/public/busca/" class="w-100 me-3" role="search">
         <input
           type="search"
           class="form-control"
           placeholder="Search..."
           aria-label="Search"
+          name="b"
         />
+        <button class="btn btn-outline-secondary btn-sm" type="submit">
+          Buscar
+        </button>
       </form>
       <div class="flex-shrink-0 dropdown">
         <a
