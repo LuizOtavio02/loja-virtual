@@ -15,7 +15,7 @@ class StatusCarrinho
         }
     }
 
-    public function produtoCarrinho($id)
+    public function produtoEstaNoCarrinho($id)
     {
         if (isset($_SESSION['carrinho'][$id])) {
             return true;
