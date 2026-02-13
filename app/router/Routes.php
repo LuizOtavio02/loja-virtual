@@ -16,7 +16,10 @@ class Routes
                 '/dev/loja-virtual/public/social/[a-z0-9]+(?:-[a-z0-9]+)*' => 'SocialController@produto',
                 '/dev/loja-virtual/public/busca' => 'BuscaController@index'
             ],
-            'post' => []
+            'post' => [
+                '/dev/loja-virtual/public/carrinho/add/[0-9]+' => 'CarrinhoController@add',
+                '/dev/loja-virtual/public/carrinho/get' => 'CarrinhoController@get'
+            ]
         ];
     }
 }
