@@ -16,4 +16,6 @@ $breadCrumb = new \Twig\TwigFunction('breadCrumb', function(){
     $breadCrumb = new BreadCrumb;
     return $breadCrumb->createBreadCrumb();
 });
+
+
 ?>

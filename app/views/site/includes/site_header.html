@@ -1,66 +1,102 @@
-<header class="py-3 mb-3 border-bottom">
-  <div
-    class="container-fluid d-grid gap-3 align-items-center"
-    style="grid-template-columns: 1fr 2fr"
-  >
-    <div class="dropdown">
-      <a
-        href="#"
-        class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        aria-label="Bootstrap menu"
-      >
-        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-          <use xlink:href="#bootstrap"></use>
-        </svg>
-      </a>
-      <ul class="dropdown-menu text-small shadow">
-        {% set i=0 %}
-        {% for categoria in categorias() %}
-        <li>
-          <a class="dropdown-item" href="/dev/loja-virtual/public/{{categoria.nome}}">{{categoria.nome}}</a>
-        </li>
-        {% set i = i+1 %}
-        {% endfor %} 
-      </ul>
-    </div>
-    <div class="d-flex align-items-center">
-      <form method="get" action="/dev/loja-virtual/public/busca/" class="w-100 me-3" role="search">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Search..."
-          aria-label="Search"
-          name="b"
-        />
-        <button class="btn btn-outline-secondary btn-sm" type="submit">
-          Buscar
-        </button>
-      </form>
-      <div class="flex-shrink-0 dropdown">
-        <a
-          href="#"
-          class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt="mdo"
-            width="32"
-            height="32"
-            class="rounded-circle"
-          />
+<header class="border-bottom bg-white">
+  <div class="container-fluid py-2">
+    <div class="row align-items-center">
+
+      <!-- LOGO + CATEGORIAS -->
+      <div class="col-md-3 d-flex align-items-center gap-3">
+
+        <!-- LOGO -->
+        <a href="/dev/loja-virtual/public/" class="text-decoration-none text-dark">
+          <h4 class="m-0 fw-bold">MinhaLoja</h4>
         </a>
-        <ul class="dropdown-menu text-small shadow">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+
+        <!-- BOTÃO CATEGORIAS -->
+        <div class="dropdown">
+          <button class="btn d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+            <i class="bi bi-list"></i>
+            Categorias
+          </button>
+
+          <ul class="dropdown-menu shadow" style="width:220px;">
+            {% for categoria in categorias() %}
+            <li>
+              <a class="dropdown-item" href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
+                {{categoria.nome}}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
       </div>
+
+      <!-- BUSCA -->
+      <div class="col-md-6">
+        <form action="/dev/loja-virtual/public/busca" method="GET">
+          <div class="input-group">
+            <input type="search" name="b" class="form-control" placeholder="Buscar produtos...">
+            <button class="btn btn-primary">Buscar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- AÇÕES -->
+      <div class="col-md-3 d-flex justify-content-end align-items-center gap-4">
+
+        <!-- LOGIN -->
+        <div class="col-md-3 d-flex justify-content-end align-items-center gap-4"> {% if session.usuario is defined %}
+          <!-- USUÁRIO LOGADO -->
+          <div class="dropdown"> <button class="btn text-dark p-0 border-0" data-bs-toggle="dropdown"> <i
+                class="bi bi-person-circle" style="font-size:1.8rem;"></i> </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+              <li class="dropdown-item-text"> Olá, <strong>{{ session.usuario.nome }}</strong> </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li> <a class="dropdown-item" href="/dev/loja-virtual/public/perfil"> <i class="bi bi-person"></i> Meu
+                  perfil </a> </li>
+              <li> <a class="dropdown-item" href="/dev/loja-virtual/public/pedidos"> <i class="bi bi-bag"></i> Minhas
+                  compras </a> </li>
+              <li> <a class="dropdown-item text-danger" href="/dev/loja-virtual/public/logout"> <i
+                    class="bi bi-box-arrow-right"></i> Sair </a> </li>
+            </ul>
+          </div> {% else %}
+          <!-- VISITANTE -->
+          <div class="d-flex gap-3"> <a href="/dev/loja-virtual/public/login" class="text-decoration-none"> Entrar </a>
+            <a href="/dev/loja-virtual/public/registrar" class="text-decoration-none"> Cadastrar </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- CARRINHO -->
+        <button class="btn position-relative" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasCarrinho">
+
+          <i class="bi bi-cart3" style="font-size:1.7rem;"></i>
+
+          <!-- contador -->
+          <span class="badge-carrinho position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+          </span>
+
+        </button>
+
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+          id="offcanvasCarrinho" aria-labelledby="offcanvasCarrinhoLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCarrinhoLabel">Seu Carrinho</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <div class="produtos-carrinho">
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </header>
