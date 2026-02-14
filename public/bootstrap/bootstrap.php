@@ -2,11 +2,7 @@
 
 use app\router\Router;
 use app\classes\Template;
-use app\models\site\User;
-use app\models\Transactions;
 use app\controllers\Controller;
-use app\controllers\BaseController;
-use app\models\site\UserModel;
 
 /**
  * Responsável por:
@@ -23,6 +19,10 @@ $twig = $template->init();
 $twig->addFunction($site_url);
 $twig->addFunction($categorias);
 $twig->addFunction($breadCrumb);
+$twig->addFunction($numeroProdutosCarrinho);
+$twig->addFunction($valorProdutosCarrinho);
+
+
 
 $controller = new Controller;
 $controller->execute($route, $twig);
