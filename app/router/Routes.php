@@ -2,7 +2,8 @@
 namespace app\router;
 
 class Routes
-{
+{   
+    // Minhas rotas e seus respectivos Controllers do get e post em um array de 'rota' => 'controller'
     public static function get()
     {
         return [
@@ -14,7 +15,8 @@ class Routes
                 '/dev/loja-virtual/public/categoria/casual/[a-z0-9]+(?:-[a-z0-9]+)*' => 'CasualController@produto',
                 '/dev/loja-virtual/public/categoria/social' => 'SocialController@index',
                 '/dev/loja-virtual/public/categoria/social/[a-z0-9]+(?:-[a-z0-9]+)*' => 'SocialController@produto',
-                '/dev/loja-virtual/public/busca' => 'BuscaController@index'
+                '/dev/loja-virtual/public/busca' => 'BuscaController@index',
+                '/dev/loja-virtual/public/carrinho' => 'CarrinhoController@index'
             ],
             'post' => [
                 '/dev/loja-virtual/public/carrinho/add/[0-9]+' => 'CarrinhoController@add',

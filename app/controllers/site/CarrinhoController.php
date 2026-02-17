@@ -15,6 +15,23 @@ class CarrinhoController extends BaseController
         $this->produtosCarrinhoRepository = new ProdutoCarrinhoRepository;
     }
 
+    public function index()
+    {
+        $produtos = new ProdutoCarrinhoRepository;
+
+        // Aqui é onde se salva os dados para utilizar na view
+        $dados = [
+            'titulo' => 'Carrinho'
+        ];
+
+        // load da view que pretende usar esse controller
+        $template = $this->twig->load('site_carrinho.html');
+        
+        // passo o array com os dados para utilizar na view
+        $template->display($dados);
+
+    }
+
     public function add($param)
     {
         $this->carrinho->add($param[0]);
