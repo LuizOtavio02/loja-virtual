@@ -18,10 +18,13 @@ class CarrinhoController extends BaseController
     public function index()
     {
         $produtos = new ProdutoCarrinhoRepository;
-
+        $produtosCarrinho = $produtos->produtosNoCarrinho();
+        $valorTotalCarrinho = $produtos->totalProdutosCarrinho(); 
         // Aqui é onde se salva os dados para utilizar na view
         $dados = [
-            'titulo' => 'Carrinho'
+            'titulo' => 'Carrinho',
+            'produtosCarrinho' => $produtosCarrinho,
+            'valorTotalCarrinho' => $valorTotalCarrinho
         ];
 
         // load da view que pretende usar esse controller

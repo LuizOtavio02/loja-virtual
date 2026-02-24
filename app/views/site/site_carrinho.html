@@ -2,5 +2,45 @@
 
 
 {% block site_content %}
-<h1>Carrinho</h1>
+<div class="container">
+    <h1>Carrinho</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Valor Total</th>
+                <th scope="col">Remover Produto</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for produto in produtosCarrinho %}
+            <tr>
+                <th>{{ produto.produtos.id }}</th>
+                <td>{{ produto.produtos.nome }}</td>
+                <td>R$ {{ produto.produtos.preco | number_format(2,',','.') }}</td>
+                <td>
+                    {{ produto.quantidade }}
+                    <button type="button" class="btn btn-outline-primary btn-sm ms-3" data-id="{{ produto.produtos.id }}">Alterar</button>
+                </td>
+                <td>R$ {{ produto.valorTotal | number_format(2,',','.') }}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm ms-4" data-id="{{ produto.produtos.id }}">Remover</button>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <strong>Total da Compra: R$ {{ valorTotalCarrinho | number_format(2,',','.') }}</strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 {% endblock %}

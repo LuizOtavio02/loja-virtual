@@ -20,7 +20,7 @@
           <ul class="dropdown-menu shadow" style="width:220px;">
             {% for categoria in categorias() %}
             <li>
-              <a class="dropdown-item" href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
+              <a class="dropdown-item" data-id="{{categoria.id}}" href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
                 {{categoria.nome}}
               </a>
             </li>

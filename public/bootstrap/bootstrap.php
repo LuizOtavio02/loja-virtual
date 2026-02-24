@@ -1,8 +1,9 @@
 <?php
 
-use app\router\Router;
 use app\classes\Template;
 use app\controllers\Controller;
+use app\router\Router;
+
 
 /**
  * Responsável por:

@@ -4,10 +4,24 @@
 
 <div class="album py-5 bg-body-tertiary">
   <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-3">
+    <div id="listar-produtos" class="row row-cols-1 row-cols-md-3 g-3">
 
-      {% for produto in produtos %}
-        <div class="col">
+    </div>
+  </div>
+</div>
+
+<script>
+  const url = window.location.pathname;
+  const partes = url.split('/');
+  const nomeCategoria = partes[partes.length - 1];
+
+  fetch(`/dev/loja-virtual/public/api/produtos/categoria/${nomeCategoria}`)
+    .then(response => response.json())
+    .then(data => {
+      let html = '';
+
+      data.forEach(produto => {
+        html += `<div class="col">
           <div class="card shadow-sm">
 
             <svg
@@ -27,15 +41,15 @@
             </svg>
 
             <div class="card-body">
-              <p class="card-text">{{ produto.nome }}</p>
-              <p class="card-text">{{ produto.preco }}</p>
+              <p class="card-text">${produto.nome}</p>
+              <p class="card-text">${produto.preco}</p>
 
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="/dev/loja-virtual/public/categoria/esportivo/{{ produto.produto_slug }}" class="btn btn-primary">
+                  <a href="/dev/loja-virtual/public/categoria/${produto.categoria_nome}/${produto.produto_slug}" class="btn btn-primary">
                     Ver produto
                   </a>
-                  <a href="#" data-id="{{produto.id}}" class="btn btn-sm btn-outline-secondary btn-add-carrinho">
+                  <a href="#" data-id="${produto.id}" class="btn btn-sm btn-outline-secondary btn-add-carrinho">
                     carrinho
                   </a>
                 </div>
@@ -44,11 +58,11 @@
             </div>
 
           </div>
-        </div>
-      {% endfor %}
+        </div>`;
+      });
 
-    </div>
-  </div>
-</div>
+      document.getElementById('listar-produtos').innerHTML = html;
+    });
+</script>
 
 {% endblock %}

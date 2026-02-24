@@ -9,12 +9,11 @@ class Routes
         return [
             'get' => [
                 '/dev/loja-virtual/public/' => 'HomeController@index',
-                '/dev/loja-virtual/public/categoria/esportivo' => 'EsportivoController@index',
-                '/dev/loja-virtual/public/categoria/esportivo/[a-z0-9]+(?:-[a-z0-9]+)*' => 'EsportivoController@produto',
-                '/dev/loja-virtual/public/categoria/casual' => 'CasualController@index',
-                '/dev/loja-virtual/public/categoria/casual/[a-z0-9]+(?:-[a-z0-9]+)*' => 'CasualController@produto',
-                '/dev/loja-virtual/public/categoria/social' => 'SocialController@index',
-                '/dev/loja-virtual/public/categoria/social/[a-z0-9]+(?:-[a-z0-9]+)*' => 'SocialController@produto',
+                '/dev/loja-virtual/public/categoria/[a-z0-9]+' => 'CategoriaController@index',
+                '/dev/loja-virtual/public/categoria/[a-z]+/[a-z0-9]+(?:-[a-z0-9]+)*' => 'CategoriaController@produto',
+                '/dev/loja-virtual/public/api/produtos/categoria/[a-z]+' => 'ApiProdutoController@listarCategoria',
+                '/dev/loja-virtual/public/api/produtos' => 'ApiProdutoController@listarProdutos',
+                '/dev/loja-virtual/public/api/produtos/detalhes/[a-z0-9]+(?:-[a-z0-9]+)*' => 'ApiProdutoController@detalhesProduto',
                 '/dev/loja-virtual/public/busca' => 'BuscaController@index',
                 '/dev/loja-virtual/public/carrinho' => 'CarrinhoController@index'
             ],

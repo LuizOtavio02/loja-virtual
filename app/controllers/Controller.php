@@ -8,7 +8,7 @@ class Controller
 {   
     // Constantes
     const NAMESPACE_CONTROLLER = '\\app\\controllers\\';
-    const FOLDERS_CONTROLLER = ['admin', 'site'];
+    const FOLDERS_CONTROLLER = ['admin', 'api', 'site'];
     const ERROR_CONTROLLER = '\\app\\controllers\\erro\\ErroController';
 
     public function execute($route, $twig)
@@ -45,7 +45,10 @@ class Controller
         // Instancio o Controller achado no Loop Foreach
         $controller = new $controllerNamespace;
         // Seto a TemplateEngine Twig no Controller que fara o Extends do BaseController 
-        $controller->setTwig($twig);
+        if (!str_contains($controllerNamespace,'Api')) {
+            $controller->setTwig($twig);
+        }
+        
         
         // Verifico se o método existe no controller se nao existir jogo uma exception
         if (!method_exists($controller, $method)) {

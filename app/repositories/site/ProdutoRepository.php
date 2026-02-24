@@ -12,18 +12,25 @@ class ProdutoRepository
         $this->produto = new ProdutoModel;
     }
 
-    public function listarProduto($limit)
+    public function listarProduto()
     {
-        $query = "select * from {$this->produto->table} order by id desc limit {$limit}";
+        $query = "select * from {$this->produto->table} order by id";
         $prepare = $this->produto->pdo->prepare($query);
         $prepare->execute();
 
         return $prepare->fetchAll();
     }
 
-    public function listarProdutoEsportivo($id)
+    public function listarProdutoCategoria($id)
     {
-        $query = "select * from {$this->produto->table} where id_categoria = :id";
+        $query = "select p.id,
+                        p.nome,
+                        p.preco,
+                        p.estoque,
+                        p.produto_slug,
+                        c.id   AS categoria_id,
+                        c.nome AS categoria_nome
+                    from {$this->produto->table} p inner join categorias c on p.id_categoria = c.id where p.id_categoria = :id";
         $prepare = $this->produto->pdo->prepare($query);
         $prepare->execute(['id' => $id]);
 
