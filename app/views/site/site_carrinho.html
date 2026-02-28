@@ -15,24 +15,8 @@
                 <th scope="col">Remover Produto</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
 
-            {% for produto in produtosCarrinho %}
-            <tr>
-                <th>{{ produto.produtos.id }}</th>
-                <td>{{ produto.produtos.nome }}</td>
-                <td>R$ {{ produto.produtos.preco | number_format(2,',','.') }}</td>
-                <td>
-                    {{ produto.quantidade }}
-                    <button type="button" class="btn btn-outline-primary btn-sm ms-3" data-id="{{ produto.produtos.id }}">Alterar</button>
-                </td>
-                <td>R$ {{ produto.valorTotal | number_format(2,',','.') }}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-danger btn-sm ms-4" data-id="{{ produto.produtos.id }}">Remover</button>
-                </td>
-            </tr>
-
-            {% endfor %}
         </tbody>
         <tfoot>
             <tr>
@@ -43,4 +27,30 @@
         </tfoot>
     </table>
 </div>
+
+<script>
+    fetch('/dev/loja-virtual/public/api/carrinho')
+    .then(response => response.json())
+    .then(data => {
+        let html = '';
+
+        data.forEach(produto => {
+            html += `<tr>
+                <th>${produto.produtos.id}</th>
+                <td>${produto.produtos.nome}</td>
+                <td>R$ ${produto.produtos.preco}</td>
+                <td>
+                    ${produto.quantidade}
+                    <button type="button" class="btn btn-outline-primary btn-sm ms-3" data-id="${produto.produtos.id}">Alterar</button>
+                </td>
+                <td>R$ ${produto.valorTotal}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm ms-4" data-id="${produto.produtos.id}">Remover</button>
+                </td>
+            </tr>`
+        });
+
+        document.getElementById('tbody').innerHTML = html;
+    })
+</script>
 {% endblock %}

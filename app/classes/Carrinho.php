@@ -1,22 +1,29 @@
-<?php 
+<?php
+
 namespace app\classes;
 
 class Carrinho
 {
     private $statusCarrinho;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->statusCarrinho = new StatusCarrinho;
         $this->statusCarrinho->criarCarrinho();
     }
 
     public function add($id)
     {
-        if ($this->statusCarrinho->produtoEstaNoCarrinho($id)) {
-            $_SESSION['carrinho'][$id] += 1;
-        }else{
-            $_SESSION['carrinho'][$id] = 1;
+        if (is_numeric($id)) {
+            if ($this->statusCarrinho->produtoEstaNoCarrinho($id)) {
+                $_SESSION['carrinho'][$id] += 1;
+            } else {
+                $_SESSION['carrinho'][$id] = 1;
+            }
+            return true;
         }
+
+        return false;
     }
 
     public function carrinhoProduto($id)
@@ -24,8 +31,13 @@ class Carrinho
         return $_SESSION['carrinho'][$id];
     }
 
-    public function update($id,$qtd)
+    public function update($id, $qtd)
     {
+        if ($qtd <= 0) {
+            $this->remove($id);
+            return;
+        }
+
         if ($this->statusCarrinho->produtoEstaNoCarrinho($id)) {
             $_SESSION['carrinho'][$id] = $qtd;
         }
@@ -51,9 +63,9 @@ class Carrinho
             return $this->statusCarrinho->carrinho();
         }
     }
+
+    public function qtdNoCarrinho()
+    {
+        return array_sum($this->statusCarrinho->carrinho());
+    }
 }
-
-
-
-
-?>
