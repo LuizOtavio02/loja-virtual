@@ -33,13 +33,9 @@ class Carrinho
 
     public function update($id, $qtd)
     {
-        if ($qtd <= 0) {
-            $this->remove($id);
-            return;
-        }
 
         if ($this->statusCarrinho->produtoEstaNoCarrinho($id)) {
-            $_SESSION['carrinho'][$id] = $qtd;
+            $_SESSION['carrinho'][$id] += $qtd;
         }
     }
 

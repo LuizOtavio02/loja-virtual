@@ -28,29 +28,6 @@
     </table>
 </div>
 
-<script>
-    fetch('/dev/loja-virtual/public/api/carrinho')
-    .then(response => response.json())
-    .then(data => {
-        let html = '';
+<script src="{{ site_url() }}/assets/js/site_carrinho.js"></script>
 
-        data.forEach(produto => {
-            html += `<tr>
-                <th>${produto.produtos.id}</th>
-                <td>${produto.produtos.nome}</td>
-                <td>R$ ${produto.produtos.preco}</td>
-                <td>
-                    ${produto.quantidade}
-                    <button type="button" class="btn btn-outline-primary btn-sm ms-3" data-id="${produto.produtos.id}">Alterar</button>
-                </td>
-                <td>R$ ${produto.valorTotal}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-danger btn-sm ms-4" data-id="${produto.produtos.id}">Remover</button>
-                </td>
-            </tr>`
-        });
-
-        document.getElementById('tbody').innerHTML = html;
-    })
-</script>
 {% endblock %}

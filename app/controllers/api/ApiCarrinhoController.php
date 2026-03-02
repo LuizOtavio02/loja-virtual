@@ -25,7 +25,8 @@ class ApiCarrinhoController
     public function index()
     {
         $carrinho = $this->statusCarrinho->carrinho();
-
+        
+        
         $produtos = [];
 
         foreach ($carrinho as $id => $qtd) {
@@ -40,8 +41,16 @@ class ApiCarrinhoController
             ];
         }
 
+        $qtd = $this->carrinho->qtdNoCarrinho();
+
+        http_response_code(200);
         header('Content-Type: application/json');
-        echo json_encode($produtos, JSON_PRETTY_PRINT);
+        echo json_encode([
+            'produtos' => $produtos,
+            'total' => [
+                'qtdTotal' => $qtd
+            ]
+            ], JSON_PRETTY_PRINT);
     }
 
     public function add()
@@ -70,6 +79,35 @@ class ApiCarrinhoController
             'success' => true,
             'message' => 'Produto adicionado ao Carrinho',
             'qtd' => $qtd
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function update($id)
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+        $qtd = $input['qtd'] ?? null;
+
+        $this->carrinho->update($id[0],$qtd);
+        $qtd = $this->carrinho->qtdNoCarrinho();
+
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Item Atualizado',
+            'qtd' => $qtd
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function delete($id)
+    {
+        $this->carrinho->remove($id[0]);
+
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Item Removido'
         ], JSON_PRETTY_PRINT);
     }
 }

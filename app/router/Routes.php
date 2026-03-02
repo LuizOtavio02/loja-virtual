@@ -16,10 +16,14 @@ class Routes
                 '/dev/loja-virtual/public/api/produtos/detalhes/[a-z0-9]+(?:-[a-z0-9]+)*' => 'ApiProdutoController@detalhesProduto',
                 '/dev/loja-virtual/public/busca' => 'BuscaController@index',
                 '/dev/loja-virtual/public/carrinho' => 'CarrinhoController@index',
+                
                 '/dev/loja-virtual/public/api/carrinho' => 'ApiCarrinhoController@index',
             ],
             'post' => [
                 '/dev/loja-virtual/public/api/carrinho' => 'ApiCarrinhoController@add',
+            ],
+            'put' => [
+                '/dev/loja-virtual/public/api/carrinho/[0-9]+' => 'ApiCarrinhoController@update'
             ]
         ];
     }
