@@ -24,6 +24,9 @@ class Routes
             ],
             'put' => [
                 '/dev/loja-virtual/public/api/carrinho/[0-9]+' => 'ApiCarrinhoController@update'
+            ],
+            'delete' => [
+                '/dev/loja-virtual/public/api/carrinho/[0-9]+' => 'ApiCarrinhoController@delete'
             ]
         ];
     }

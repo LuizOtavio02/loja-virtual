@@ -26,12 +26,14 @@ class ApiCarrinhoController
     {
         $carrinho = $this->statusCarrinho->carrinho();
         
-        
         $produtos = [];
+        $valorCarrinho = 0;
 
         foreach ($carrinho as $id => $qtd) {
             $produtoCarrinho = $this->produtoModel->find('id', $id);
             $valor = $produtoCarrinho['preco'];
+            
+            $valorCarrinho += $valor * $qtd;
 
             $produtos[] = [
                 'produtos' => $produtoCarrinho,
@@ -48,7 +50,8 @@ class ApiCarrinhoController
         echo json_encode([
             'produtos' => $produtos,
             'total' => [
-                'qtdTotal' => $qtd
+                'qtdTotal' => $qtd,
+                'valorCarrinho' => $valorCarrinho
             ]
             ], JSON_PRETTY_PRINT);
     }

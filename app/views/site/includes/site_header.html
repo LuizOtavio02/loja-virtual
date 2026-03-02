@@ -20,7 +20,8 @@
           <ul class="dropdown-menu shadow" style="width:220px;">
             {% for categoria in categorias() %}
             <li>
-              <a class="dropdown-item" data-id="{{categoria.id}}" href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
+              <a class="dropdown-item" data-id="{{categoria.id}}"
+                href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
                 {{categoria.nome}}
               </a>
             </li>
@@ -69,35 +70,20 @@
         </div>
 
         <!-- CARRINHO -->
-        <button id="botaoCarrinho" class="btn position-relative" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasCarrinho">
+        <a href="/dev/loja-virtual/public/carrinho" id="botaoCarrinho" class="btn position-relative" type="button" >
 
           <i class="bi bi-cart3" style="font-size:1.7rem;"></i>
 
           <!-- contador -->
-          <span  class="badge-carrinho position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span class="badge-carrinho position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           </span>
 
-        </button>
+        </a>
 
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-          id="offcanvasCarrinho" aria-labelledby="offcanvasCarrinhoLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasCarrinhoLabel">Carrinho</h5>
-            <a href="/dev/loja-virtual/public/carrinho">Ver Carrinho</a>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-          </div>
-
-          <div class="offcanvas-body">
-            <div class="produtos-carrinho">
-              
-            </div>
-          </div>
-        </div>
+        
 
       </div>
 
     </div>
   </div>
 </header>
-
