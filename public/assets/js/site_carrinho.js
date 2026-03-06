@@ -96,3 +96,24 @@ document.addEventListener('click', function (event) {
     }
 
 })
+
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('finalizar-compra')) {
+        event.preventDefault();
+
+        fetch('/dev/loja-virtual/public/api/logado', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "/dev/loja-virtual/public/compra";
+            }else {
+                window.location.href = "/dev/loja-virtual/public/login"
+            }
+        })
+        .catch(error => {
+            console.log('Erro:', error);
+        })
+    }
+})

@@ -14,7 +14,8 @@ use app\router\Router;
 // inicio o router para pegar o Controller compatível a rota
 $router = new Router;
 $route = $router->run();
-
+//unset($_SESSION['cliente']);
+//dd($_SESSION);
 // inicio twig que é uma Template engine que utilizo para renderizar as paginas HTML
 $template = new Template;
 $twig = $template->init();

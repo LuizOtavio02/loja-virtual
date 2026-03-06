@@ -25,14 +25,14 @@ class ApiCarrinhoController
     public function index()
     {
         $carrinho = $this->statusCarrinho->carrinho();
-        
+
         $produtos = [];
         $valorCarrinho = 0;
 
         foreach ($carrinho as $id => $qtd) {
             $produtoCarrinho = $this->produtoModel->find('id', $id);
             $valor = $produtoCarrinho['preco'];
-            
+
             $valorCarrinho += $valor * $qtd;
 
             $produtos[] = [
@@ -48,12 +48,14 @@ class ApiCarrinhoController
         http_response_code(200);
         header('Content-Type: application/json');
         echo json_encode([
+            'success' => true,
             'produtos' => $produtos,
             'total' => [
                 'qtdTotal' => $qtd,
                 'valorCarrinho' => $valorCarrinho
             ]
-            ], JSON_PRETTY_PRINT);
+
+        ], JSON_PRETTY_PRINT);
     }
 
     public function add()
@@ -90,7 +92,7 @@ class ApiCarrinhoController
         $input = json_decode(file_get_contents("php://input"), true);
         $qtd = $input['qtd'] ?? null;
 
-        $this->carrinho->update($id[0],$qtd);
+        $this->carrinho->update($id[0], $qtd);
         $qtd = $this->carrinho->qtdNoCarrinho();
 
         header('Content-Type: application/json');
