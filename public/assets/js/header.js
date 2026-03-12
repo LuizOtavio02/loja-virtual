@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    header();
+    headerLogin();
+    headerCategoria();
 });
 
 
-function header() {
+function headerLogin() {
     fetch('/dev/loja-virtual/public/api/logado', {
         method: 'GET'
     })
@@ -48,6 +49,44 @@ function header() {
             console.log('Erro:', error);
         })
 
+}
+
+function headerCategoria() {
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('btn-categoria')) {
+            event.preventDefault();
+
+            fetch('/dev/loja-virtual/public/api/categoria', {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    let html = '';
+                    if (data.success) {
+
+                        data.categorias.forEach(categoria => {
+                            html += `
+                            <li>
+                                <a class="dropdown-item" data-id="${categoria.id}" href="/dev/loja-virtual/public/categoria/${categoria.nome}">
+                                 ${categoria.nome}
+                                </a>
+                            </li>`;
+                        });
+
+                    }
+
+                    html += `
+                    <hr>
+                    <li><a class="dropdown-item" href="/dev/loja-virtual/public/contato">Contato</a></li>
+                    `;
+                    document.getElementById('categoria').innerHTML = html;
+                })
+                .catch(error => {
+                    console.log('Erro:', error);
+                })
+        }
+
+    })
 }
 
 document.addEventListener('click', function (event) {

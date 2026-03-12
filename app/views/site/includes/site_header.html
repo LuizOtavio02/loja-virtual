@@ -12,20 +12,13 @@
 
         <!-- BOTÃO CATEGORIAS -->
         <div class="dropdown">
-          <button class="btn d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+          <button class="btn-categoria btn d-flex align-items-center gap-2" data-bs-toggle="dropdown">
             <i class="bi bi-list"></i>
             Categorias
           </button>
 
-          <ul class="dropdown-menu shadow" style="width:220px;">
-            {% for categoria in categorias() %}
-            <li>
-              <a class="dropdown-item" data-id="{{categoria.id}}"
-                href="/dev/loja-virtual/public/categoria/{{categoria.nome}}">
-                {{categoria.nome}}
-              </a>
-            </li>
-            {% endfor %}
+          <ul id="categoria" class=" dropdown-menu shadow" style="width:220px;">
+            
           </ul>
         </div>
 

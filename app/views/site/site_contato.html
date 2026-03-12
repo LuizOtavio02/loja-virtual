@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+
+
+{% block site_content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3 class="text-center mb-4">Entre em Contato</h3>
+
+                    <form id="contato-form">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" id="nome" class="form-control" placeholder="Digite seu nome">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Digite seu email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Assunto</label>
+                            <input type="text" id="assunto" class="form-control" placeholder="Digite o assunto">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="mensagem" rows="5"
+                                placeholder="Digite sua mensagem"></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" id="submit" class="btn btn-primary">
+                                Enviar Mensagem
+                            </button>
+                        </div>
+
+                    </form>
+                    <div id="messageDev"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('contato-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const assunto = document.getElementById('assunto').value.trim();
+        const mensagem = document.getElementById('mensagem').value.trim();
+        const messageDiv = document.getElementById("messageDev");
+
+        if (!nome || !email || !assunto || !mensagem) {
+            messageDiv.textContent = "Preencha Todos os campos.";
+            messageDiv.className = "error";
+            return;
+        }
+
+        fetch('/dev/loja-virtual/public/api/contato', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'nome': nome,
+                'email': email,
+                'assunto': assunto,
+                'mensagem': mensagem
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log('Erro:', error);
+        })
+
+    })
+</script>
+
+{% endblock %}

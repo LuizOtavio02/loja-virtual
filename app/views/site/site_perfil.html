@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block site_content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div id="card" class="card shadow">
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    fetch('/dev/loja-virtual/public/api/perfil', {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(data => {
+            let html = `<div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Perfil do Usuário</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Nome:</strong>
+                            <p class="mb-0">${data.nome}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Email:</strong>
+                            <p class="mb-0">${data.email}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Telefone:</strong>
+                            <p class="mb-0">${data.telefone}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Data de Cadastro:</strong>
+                            <p class="mb-0">${data.create}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-3">
+                        <strong>Endereço:</strong>
+                        <p class="mb-0">
+                            ${data.rua}, ${data.numero}<br>
+                            ${data.bairro} <br>
+                            ${data.cidade} <br>
+                            ${data.estado}
+                        </p>
+                    </div>
+
+                    <div class="text-end">
+                        <button class="btn btn-primary">
+                            Editar Perfil
+                        </button>
+                    </div>
+
+                </div>`
+
+            document.getElementById('card').innerHTML = html;
+        })
+</script>
+
+{% endblock %}
