@@ -12,13 +12,24 @@ class ApiAutenticacaoController
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
+        header('Content-Type: application/json');
+
+        if (!$input || empty($input['email']) || empty($input['password'])) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Email ou Senha Vazios'
+            ]);
+            return;
+        }
+
         $filter = new Filters;
         $email = $filter->filter($input['email'], 'email');
 
         $usuarioCliente = new UsuarioCliente;
         $logar = $usuarioCliente->login($email, $input['password']);
 
-        header('Content-Type: application/json');
+        
 
         if ($logar) {
             http_response_code(200);
