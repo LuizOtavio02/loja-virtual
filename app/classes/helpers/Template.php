@@ -1,12 +1,12 @@
 <?php 
-namespace app\classes;
+namespace app\classes\helpers;
 
 class Template
 {
     public function loader()
     {
-        return new \Twig\Loader\FilesystemLoader([dirname(__DIR__) . '/views/admin',
-            dirname(__DIR__) . '/views/site']);
+        return new \Twig\Loader\FilesystemLoader([dirname(__DIR__,2) . '/views/admin',
+            dirname(__DIR__,2) . '/views/site']);
     }
 
     public function init()

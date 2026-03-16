@@ -2,8 +2,8 @@
 
 namespace app\controllers\api;
 
-use app\classes\Carrinho;
-use app\classes\StatusCarrinho;
+use app\classes\carrinho\Carrinho;
+use app\classes\carrinho\StatusCarrinho;
 use app\models\site\ProdutoModel;
 use app\repositories\site\ProdutoCarrinhoRepository;
 

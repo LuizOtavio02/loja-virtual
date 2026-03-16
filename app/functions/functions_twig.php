@@ -1,6 +1,6 @@
 <?php
 
-use app\classes\BreadCrumb;
+use app\classes\helpers\BreadCrumb;
 
 
 // Função para passar a URL/Base path para trabalhar no HTML

@@ -1,7 +1,8 @@
 <?php 
 namespace app\controllers\api;
 
-use app\classes\Redirect;
+
+use app\classes\helpers\Redirect;
 use app\repositories\site\ProdutoRepository;
 
 class ApiBuscaController

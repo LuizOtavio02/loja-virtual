@@ -1,7 +1,7 @@
 <?php 
 namespace app\controllers\api;
 
-use app\classes\SessaoCliente;
+use app\classes\cliente\SessaoCliente;
 use app\models\site\EnderecoModel;
 use app\models\site\UserModel;
 

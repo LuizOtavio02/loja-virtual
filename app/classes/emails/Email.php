@@ -1,6 +1,6 @@
 <?php
 
-namespace app\classes;
+namespace app\classes\emails;
 
 use app\interfaces\InterfaceTemplateEmail;
 use PHPMailer\PHPMailer\PHPMailer;

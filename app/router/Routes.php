@@ -20,6 +20,7 @@ class Routes
                 '/dev/loja-virtual/public/cadastrar' => 'AutenticacaoController@cadastrar',
                 '/dev/loja-virtual/public/perfil' => 'PerfilController@index',
                 '/dev/loja-virtual/public/contato' => 'ContatoController@index',
+                '/dev/loja-virtual/public/compra' => 'CompraController@index',
 
                 '/dev/loja-virtual/public/api/carrinho' => 'ApiCarrinhoController@index',
                 '/dev/loja-virtual/public/api/busca' => 'ApiBuscaController@index',

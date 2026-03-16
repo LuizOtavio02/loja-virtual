@@ -1,6 +1,7 @@
 <?php 
-namespace app\classes;
+namespace app\classes\cliente;
 
+use app\classes\helpers\Redirect;
 use app\models\site\UserModel;
 
 class UsuarioCliente

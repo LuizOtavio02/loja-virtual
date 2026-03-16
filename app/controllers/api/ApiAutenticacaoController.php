@@ -2,9 +2,9 @@
 
 namespace app\controllers\api;
 
-use app\classes\Filters;
-use app\classes\SessaoCliente;
-use app\classes\UsuarioCliente;
+use app\classes\cliente\SessaoCliente;
+use app\classes\cliente\UsuarioCliente;
+use app\classes\helpers\Filters;
 
 class ApiAutenticacaoController
 {

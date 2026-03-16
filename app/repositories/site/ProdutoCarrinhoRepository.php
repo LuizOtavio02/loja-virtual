@@ -1,7 +1,7 @@
 <?php 
 namespace app\repositories\site;
 
-use app\classes\Carrinho;
+use app\classes\carrinho\Carrinho;
 use app\models\site\ProdutoModel;
 
 class ProdutoCarrinhoRepository

@@ -1,5 +1,5 @@
 <?php 
-namespace app\classes;
+namespace app\classes\carrinho;
 
 class StatusCarrinho
 {

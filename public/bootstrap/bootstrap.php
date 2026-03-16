@@ -1,6 +1,7 @@
 <?php
 
-use app\classes\Template;
+
+use app\classes\helpers\Template;
 use app\controllers\Controller;
 use app\router\Router;
 
@@ -11,14 +12,16 @@ use app\router\Router;
  * - Iniciar o Twig
  * - Encontrar o Controller correspondente à rota e executá-lo
  */
+
 // inicio o router para pegar o Controller compatível a rota
 $router = new Router;
 $route = $router->run();
-//dd($b);
+
 // inicio twig que é uma Template engine que utilizo para renderizar as paginas HTML
 $template = new Template;
 $twig = $template->init();
-// Adiciono funções a minha Template engine para que possa trabalha4r com elas no HTML
+
+// Adiciono funções a minha Template engine para que possa trabalhar com elas no HTML
 $twig->addFunction($site_url);
 $twig->addFunction($breadCrumb);
 

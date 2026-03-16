@@ -1,5 +1,5 @@
 <?php 
-namespace app\classes;
+namespace app\classes\helpers;
 
 class Filters
 {

@@ -2,9 +2,9 @@
 
 namespace app\controllers\api;
 
-use app\classes\Email;
-use app\classes\Filters;
-use app\classes\TemplateContato;
+use app\classes\emails\Email;
+use app\classes\emails\TemplateContato;
+use app\classes\helpers\Filters;
 
 class ApiContatoController
 {
